@@ -59,11 +59,7 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    do {
-        var dummyActivity: Activity = .init(title: "Test", loggedData: [])
-        let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity)
-        return ActivityDetailView(viewModel: dummyViewModel)
-    } catch let error {
-        fatalError("Failed to create ModelContainer for Activity. Error: \(error)")
-    }
+    let dummyActivity: Activity = .init(title: "Test", loggedData: [])
+    let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity)
+    return ActivityDetailView(viewModel: dummyViewModel)
 }
