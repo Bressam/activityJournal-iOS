@@ -9,64 +9,33 @@ import Foundation
 import SwiftData
 
 class ActivitiesListViewModel: ObservableObject {
+    // MARK: - Properties
+    private let activitiesService: ActivitiesService
     @Published var activities: [Activity]
-    var modelContext: ModelContext
     
-    init(activities: [Activity] = [], modelContext: ModelContext) {
+    
+    init(activitiesService: ActivitiesService, activities: [Activity] = []) {
+        self.activitiesService = activitiesService
         self.activities = activities
-        self.modelContext = modelContext
     }
     
     func createActivity() -> Activity {
-        let activity = Activity()
-        modelContext.insert(activity)
+        let activity = activitiesService.createActivity()
         fetchActivities()
         return activity
     }
     
     func deleteActivity(at indexSet: IndexSet) {
-        for index in indexSet {
-            let activity = activities[index]
-            modelContext.delete(activity)
-        }
+        activitiesService.deleteActivity(at: indexSet)
         fetchActivities()
     }
     
     func fetchActivities() {
-        do {
-            let descriptor = FetchDescriptor<Activity>(sortBy: [SortDescriptor(\.title)])
-            activities = try modelContext.fetch(descriptor)
-        } catch let error {
-            print("Activities fetch failed. Error: \(error)")
-        }
+        activities = activitiesService.fetchActivities()
     }
     
     func generateMockData() {
-        // Activity categories
-        let sportActivity = Activity(title: "Go to the gym",  activityDescription: "Gym!", category: .sport)
-        let sport2Activity = Activity(title: "Rock climbing",  activityDescription: "Go to rock climbing gym!", category: .sport)
-        let studyActivity = Activity(title: "Study code",  activityDescription: "Learning new language!", category: .study)
-        let study2Activity = Activity(title: "Study french",  activityDescription: "Learning new language!", category: .study)
-        modelContext.insert(sportActivity)
-        modelContext.insert(sport2Activity)
-        modelContext.insert(studyActivity)
-        modelContext.insert(study2Activity)
-
-        // Generate past day activity logs
-        let currentDate = Date()
-        let secondsPerDay: Double = 86400
-        for dayCount in 0..<100 {
-            let newPastDate = currentDate.addingTimeInterval(-(Double(dayCount) * secondsPerDay))
-            sportActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
-            if dayCount % 2 == 0 {
-                sport2Activity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
-            }
-            if dayCount % 3 == 0 {
-                studyActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
-            }
-        }
-        
-        // Manually fetch
+        activitiesService.generateMockData()
         fetchActivities()
     }
 }
