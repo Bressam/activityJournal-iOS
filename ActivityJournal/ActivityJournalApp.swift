@@ -14,8 +14,14 @@ struct ActivityJournalApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ActivitiesListView(viewModel: .init(modelContext: container.mainContext))
-                .modelContext(container.mainContext)
+            TabView {
+                ActivitiesListView(viewModel: .init(modelContext: container.mainContext))
+                    .modelContext(container.mainContext)
+                    .tabItem { Label("List", systemImage: "mail.stack") }
+                ActivitiesChartsView(viewModel: .init(modelContext: container.mainContext))
+                    .modelContext(container.mainContext)
+                    .tabItem { Label("Charts", systemImage: "chart.line.uptrend.xyaxis.circle") }
+            }
         }
     }
     
