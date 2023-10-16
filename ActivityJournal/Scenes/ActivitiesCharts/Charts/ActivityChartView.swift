@@ -10,6 +10,8 @@ import Charts
 
 struct ActivityChartView: View {
     @State var activityByCategory: ActivityByCategory
+    var activity: Activity?
+    @State private var showingPopover = false
     
     var body: some View {
         if activityByCategory.monthlyData.isEmpty {
@@ -22,7 +24,7 @@ struct ActivityChartView: View {
         }
     }
     
-    var emptyDataView: some View {
+    private var emptyDataView: some View {
         ZStack {
             ContentUnavailableView(label: {
                 Label("No content for category: \(String(describing: activityByCategory.category))",
@@ -30,15 +32,14 @@ struct ActivityChartView: View {
                 .symbolEffect(.pulse.byLayer)
             }, description: {
                 Text("New data will appear when logged at the activity details.")
+                addLogToActivityButton(buttonTitle: "Do you want to log data?")
             })
-        }.background(activityByCategory.category.chartDataColor.opacity(0.8).gradient)
+        }.background(activityByCategory.category.chartDataColor.opacity(0.6).gradient)
     }
     
-    var activityLogChartView: some View {
+    private var activityLogChartView: some View {
         VStack(alignment: .leading) {
-            Text( "\(activityByCategory.category.description.capitalized)")
-                .font(.title)
-                .foregroundStyle(activityByCategory.category.chartDataColor.gradient)
+            chartHeaderView
             Chart {
                 ForEach(activityByCategory.monthlyData) { monthActivity in
                     BarMark(x: .value("Month", monthActivity.date, unit: .month),
@@ -60,11 +61,37 @@ struct ActivityChartView: View {
             }
         }
     }
+    
+    @ViewBuilder
+    private var chartHeaderView: some View {
+        HStack {
+            Text( "\(activityByCategory.category.description.capitalized)")
+                .font(.title)
+                .foregroundStyle(activityByCategory.category.chartDataColor.gradient)
+            Spacer()
+            addLogToActivityButton(buttonTitle: "Log data")
+        }
+    }
+    
+    @ViewBuilder
+    private func addLogToActivityButton(buttonTitle: String) -> some View {
+        Button(buttonTitle) {
+            guard activity != nil else {
+                return
+            }
+            showingPopover = true
+        }
+        .fontWeight(.medium)
+        .popover(isPresented: $showingPopover) {
+            ActivityDetailView(isModallyPresented: true,
+                               viewModel: .init(activity: activity!))
+        }
+    }
 }
 
 #Preview {
     let calendar = Calendar(identifier: .gregorian)
-    var monthlyActivities: [MonthActivities] = [
+    var monthlyActivities: [MonthlyActivitiesData] = [
         .init(activitiesCount: 30,
               date: calendar.makeDate(year: 2023,
                                       month: 1)),
@@ -85,7 +112,8 @@ struct ActivityChartView: View {
     // Force empty data
     monthlyActivities = []
 
-    return ActivityChartView(activityByCategory: .init(category: .sport,
+    return ActivityChartView(activityByCategory: .init(category: .none,
                                                        monthlyData: monthlyActivities,
-                                                       monthlyGoal: 25))
+                                                       monthlyGoal: 25),
+                             activity: .init())
 }

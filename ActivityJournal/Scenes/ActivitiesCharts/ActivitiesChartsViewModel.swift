@@ -8,19 +8,6 @@
 import Foundation
 import SwiftData
 
-struct ActivityByCategory: Identifiable {
-    let id = UUID()
-    let category: ActivityCategory
-    let monthlyData: [MonthActivities]
-    let monthlyGoal: Int?
-}
-
-struct MonthActivities: Identifiable {
-    var id = UUID()
-    let activitiesCount: Int
-    let date: Date
-}
-
 class ActivitiesChartsViewModel: ObservableObject {
     private var activities: [Activity] = [] {
         didSet {
@@ -43,12 +30,16 @@ class ActivitiesChartsViewModel: ObservableObject {
         }
     }
     
+    func getActivity(by category: ActivityCategory) -> Activity? {
+        return activities.first(where: { $0.category == category })
+    }
+    
     private func generateChartData() {
         var activitiesByCategory: [ActivityByCategory] = .init()
         
         // Each Activity user created
         for activity in activities {
-            var chartMonthActivities: [MonthActivities] = .init()
+            var chartMonthActivities: [MonthlyActivitiesData] = .init()
             
             // Group all logged data by month per year
             let loggedActivitiesByMonth = Dictionary(grouping: activity.loggedData, by: { $0.date.month })

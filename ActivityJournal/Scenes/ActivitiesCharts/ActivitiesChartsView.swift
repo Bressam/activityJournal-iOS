@@ -16,7 +16,7 @@ struct ActivitiesChartsView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(viewModel.activitiesByCategory) { activityByCategory in
-                        ActivityChartView(activityByCategory: activityByCategory)
+                        ActivityChartView(activityByCategory: activityByCategory, activity: viewModel.getActivity(by: activityByCategory.category))
                     }
                 }
                 .scrollTargetLayout()

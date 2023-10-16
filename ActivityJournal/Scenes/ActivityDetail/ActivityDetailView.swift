@@ -9,15 +9,41 @@ import SwiftUI
 import SwiftData
 
 struct ActivityDetailView: View {
+    private let viewtitle: String = "Edit activity"
+    let isModallyPresented: Bool
     @Bindable var viewModel: ActivityDetailViewModel
     
+    init(isModallyPresented: Bool = false,
+         viewModel: ActivityDetailViewModel) {
+        self.isModallyPresented = isModallyPresented
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
-        Form {
-            detailsSection
-            activityLogSection
+        ZStack {
+            Color(UIColor.secondarySystemBackground).ignoresSafeArea()
+            VStack {
+                headerView
+                Form {
+                    detailsSection
+                    activityLogSection
+                }
+            }
         }
-        .navigationTitle("Edit activity")
+        .navigationTitle(viewtitle)
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    @ViewBuilder
+    private var headerView: some View {
+        if isModallyPresented {
+            Text(viewtitle)
+                .font(.headline)
+                .foregroundStyle(.primary)
+                .padding([.top], 16)
+        } else {
+            EmptyView()
+        }
     }
     
     private var detailsSection: some View {
@@ -33,7 +59,7 @@ struct ActivityDetailView: View {
                     Text(category.name).tag(category)
                 }
             }
-        }
+        }.multilineTextAlignment(TextAlignment.leading)
     }
     
     private var activityLogSection: some View {
@@ -41,7 +67,7 @@ struct ActivityDetailView: View {
             List {
                 ForEach($viewModel.activity.sortedLoggedData) { loggedData in
                     HStack {
-                        DatePicker("Done at:", selection: loggedData.date)
+                        DatePicker("Done at", selection: loggedData.date)
                     }
                 }.onDelete(perform: { indexSet in
                     viewModel.deleteActivity(at: indexSet)
@@ -71,5 +97,6 @@ struct ActivityDetailView: View {
 #Preview {
     let dummyActivity: Activity = .init(title: "Test", loggedData: [])
     let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity)
-    return ActivityDetailView(viewModel: dummyViewModel)
+    return ActivityDetailView(isModallyPresented: true,
+                              viewModel: dummyViewModel)
 }
