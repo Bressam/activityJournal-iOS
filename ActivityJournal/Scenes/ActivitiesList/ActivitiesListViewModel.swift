@@ -43,10 +43,14 @@ class ActivitiesListViewModel: ObservableObject {
     
     func generateMockData() {
         // Activity categories
-        let sportActivity = Activity(title: "Pratice Sports",  activityDescription: "Any sport counts!", category: .sport)
-        let studyActivity = Activity(title: "Study",  activityDescription: "Any study activity counts!", category: .study)
+        let sportActivity = Activity(title: "Go to the gym",  activityDescription: "Gym!", category: .sport)
+        let sport2Activity = Activity(title: "Rock climbing",  activityDescription: "Go to rock climbing gym!", category: .sport)
+        let studyActivity = Activity(title: "Study code",  activityDescription: "Learning new language!", category: .study)
+        let study2Activity = Activity(title: "Study french",  activityDescription: "Learning new language!", category: .study)
         modelContext.insert(sportActivity)
+        modelContext.insert(sport2Activity)
         modelContext.insert(studyActivity)
+        modelContext.insert(study2Activity)
 
         // Generate past day activity logs
         let currentDate = Date()
@@ -54,6 +58,7 @@ class ActivitiesListViewModel: ObservableObject {
         for dayCount in 0..<100 {
             let newPastDate = currentDate.addingTimeInterval(-(Double(dayCount) * secondsPerDay))
             sportActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
+            sport2Activity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
             studyActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
         }
         

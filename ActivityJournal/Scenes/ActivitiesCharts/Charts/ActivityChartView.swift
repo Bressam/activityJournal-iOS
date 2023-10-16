@@ -49,7 +49,8 @@ struct ActivityChartView: View {
             Chart {
                 ForEach(activityChartData.monthlyData) { monthActivity in
                     BarMark(x: .value("Month", monthActivity.date, unit: .month),
-                            y: .value("Logs", monthActivity.activitiesCount))
+                            y: .value("Logs", monthActivity.activitiesCount),
+                            width: .init(integerLiteral: 32))
                     .foregroundStyle(activityChartData.category.chartDataColor.gradient)
                 }
                 
@@ -65,7 +66,10 @@ struct ActivityChartView: View {
                         }
                 }
             }.chartXAxis {
-                AxisMarks(values:  .automatic(desiredCount: 12))
+                AxisMarks(values: .stride(by: .month, count: 1))
+            }.chartYAxis {
+                let highestMonthData = activityChartData.monthlyData.sorted(by: { $0.activitiesCount > $1.activitiesCount }).first!
+                AxisMarks(values: [0, (Double(highestMonthData.activitiesCount) * 1.1)])
             }
         }
     }
