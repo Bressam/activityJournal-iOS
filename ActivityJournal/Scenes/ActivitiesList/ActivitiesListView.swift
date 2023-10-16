@@ -47,7 +47,7 @@ struct ActivitiesListView: View {
     }
     
     @ViewBuilder
-    var activitiesList: some View {
+    private var activitiesList: some View {
         if viewModel.activities.isEmpty {
             emptyItemsView
         } else {
@@ -66,7 +66,7 @@ struct ActivitiesListView: View {
         }
     }
     
-    var emptyItemsView: some View {
+    private var emptyItemsView: some View {
         ContentUnavailableView("Empty Activities",
                                systemImage: "mail.stack",
                                description: Text("Please create a new activity with button above."))
