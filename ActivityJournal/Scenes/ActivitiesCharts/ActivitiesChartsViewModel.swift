@@ -30,31 +30,63 @@ class ActivitiesChartsViewModel: ObservableObject {
         }
     }
     
-    func getActivity(by category: ActivityCategory) -> Activity? {
-        return activities.first(where: { $0.category == category })
+    func getActivity(by id: PersistentIdentifier) -> Activity? {
+        return activities.first(where: { $0.id == id })
     }
+    
+    
+    // Lista de categorias [ActivityByCategory]
+    // Cada categoria com lsita de graficos -> activitiesChartsData: [ActivityChartData]
+
     
     private func generateChartData() {
         var activitiesByCategory: [ActivityByCategory] = .init()
-        
-        // Each Activity user created
-        for activity in activities {
-            var chartMonthActivities: [MonthlyActivitiesData] = .init()
+
+        for category in ActivityCategory.allCases {
+            var activityCategoryData: ActivityByCategory = .init(category: category, activitiesChartsData: [])
             
-            // Group all logged data by month per year
-            let loggedActivitiesByMonth = Dictionary(grouping: activity.loggedData, by: { $0.date.month })
+            // Get current activity list of activities
+            let currentCategoryActivities = activities.filter({ $0.category == category })
             
-            // For each month, append to chart data array
-            for month in loggedActivitiesByMonth.keys {
-                let monthDate = loggedActivitiesByMonth[month]!.first?.date.startOfMonth()
-                chartMonthActivities.append(.init(activitiesCount: loggedActivitiesByMonth[month]?.count ?? 0, date: monthDate!))
+            // Prepare chart data of each activity from current category
+            for currentCategoryActivity in currentCategoryActivities {
+                let activityMonthlyLogData = getMonthlyChartData(from: currentCategoryActivity)
+                let activityChartData: ActivityChartData = .init(id: currentCategoryActivity.id,
+                                                                 title: currentCategoryActivity.title,
+                                                                 category: category,
+                                                                 monthlyData: activityMonthlyLogData,
+                                                                 monthlyGoal: currentCategoryActivity.monthlyGoal)
+
+                activityCategoryData.activitiesChartsData.append(activityChartData)
             }
             
-            // Save to category
-            activitiesByCategory.append(.init(category: activity.category, monthlyData: chartMonthActivities, monthlyGoal: activity.monthlyGoal))
+            // Add only existing categories
+            if !activityCategoryData.activitiesChartsData.isEmpty {
+                activitiesByCategory.append(activityCategoryData)
+            }
         }
+        
+        // Each Activity user created
+//        for activity in activities {
+//            
+//        }
         
         // Notify listeners
         self.activitiesByCategory = activitiesByCategory
+    }
+    
+    private func getMonthlyChartData(from activity: Activity) -> [MonthlyActivitiesData] {
+        var chartMonthActivities: [MonthlyActivitiesData] = .init()
+        
+        // Group all logged data by month per year
+        let loggedActivitiesByMonth = Dictionary(grouping: activity.loggedData, by: { $0.date.month })
+        
+        // For each month, append to chart data array
+        for month in loggedActivitiesByMonth.keys {
+            let monthDate = loggedActivitiesByMonth[month]!.first?.date.startOfMonth()
+            chartMonthActivities.append(.init(activitiesCount: loggedActivitiesByMonth[month]?.count ?? 0, date: monthDate!))
+        }
+        
+        return chartMonthActivities
     }
 }
