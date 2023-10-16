@@ -31,6 +31,18 @@ struct ActivityChartView: View {
                                 y: .value("Logs", monthActivity.activitiesCount))
                         .foregroundStyle(activityByCategory.category.chartDataColor.gradient)
                     }
+
+                    if let monthlyGoal = activityByCategory.monthlyGoal {
+                        let markerColor = activityByCategory.category.chartGoalMarkerColor
+                        RuleMark(y: .value("Monthly Goal", monthlyGoal))
+                            .foregroundStyle(markerColor)
+                            .lineStyle(StrokeStyle(lineWidth:1, dash: [5]))
+                            .annotation(alignment: .leading) {
+                                Text("Goal")
+                                    .font(.subheadline.bold())
+                                    .foregroundStyle(markerColor)
+                            }
+                    }
                 }
             }
             .padding()

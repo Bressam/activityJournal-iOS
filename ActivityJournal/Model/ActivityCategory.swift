@@ -38,6 +38,15 @@ enum ActivityCategory: Codable, CaseIterable {
         }
     }
     
+    var chartGoalMarkerColor: Color {
+        switch self {
+        case .none: return .blue
+        case .sport: return .red
+        case .finacesSaving: return .yellow
+        case .study: return .yellow
+        }
+    }
+    
     var description: String {
         switch self {
         case .none: return "General activities"

@@ -25,6 +25,9 @@ struct ActivityDetailView: View {
             TextField("Title", text: $viewModel.activity.title)
             TextField("Description", text: $viewModel.activity.activityDescription)
                 .lineLimit(2, reservesSpace: true)
+            TextField("Monthly Goal", value: $viewModel.activity.monthlyGoal,
+                      format: .number)
+                .keyboardType(.numbersAndPunctuation)
             Picker("Category", selection: $viewModel.activity.category) {
                 ForEach(ActivityCategory.allCases, id: \.self) { category in
                     Text(category.name).tag(category)
@@ -38,7 +41,7 @@ struct ActivityDetailView: View {
             List {
                 ForEach($viewModel.activity.sortedLoggedData) { loggedData in
                     HStack {
-                        DatePicker("Date", selection: loggedData.date)
+                        DatePicker("Done at:", selection: loggedData.date)
                     }
                 }.onDelete(perform: { indexSet in
                     viewModel.deleteActivity(at: indexSet)
