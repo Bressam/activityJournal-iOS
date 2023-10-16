@@ -34,14 +34,13 @@ struct ActivitiesListView: View {
         NavigationStack(path: $path) {
             ZStack {
                 Color(UIColor.secondarySystemBackground)
-                    .ignoresSafeArea()
                 activitiesList
             }
             .toolbar(content: {
                 animatedAddButton
             })
             .navigationTitle("Activities")
-            .navigationBarTitleDisplayMode(.large)
+            .modifier(JournalNavigationStyle())
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
@@ -61,6 +60,7 @@ struct ActivitiesListView: View {
                     viewModel.deleteActivity(at: indexSet)
                 })
             }
+            .scrollContentBackground(.hidden)
             .navigationDestination(for: Activity.self) { activity in
                 ActivityDetailView(viewModel: .init(activity: activity))
             }

@@ -23,6 +23,7 @@ struct ActivitiesChartsView: View {
             }
             .scrollTargetBehavior(.viewAligned)
             .navigationTitle("Monthly progress")
+            .modifier(JournalNavigationStyle())
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
