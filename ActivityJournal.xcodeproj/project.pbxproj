@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18158D012ADD75B600789A59 /* ActivityChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D002ADD75B600789A59 /* ActivityChartView.swift */; };
+		18158D042ADD78A700789A59 /* Calendar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D032ADD78A700789A59 /* Calendar+Extensions.swift */; };
+		18158D062ADD78C500789A59 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D052ADD78C500789A59 /* Date+Extensions.swift */; };
 		18D998322ADC7B880019D9F2 /* ActivityJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998312ADC7B880019D9F2 /* ActivityJournalApp.swift */; };
 		18D998342ADC7B880019D9F2 /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998332ADC7B880019D9F2 /* ActivityDetailView.swift */; };
 		18D998362ADC7B890019D9F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18D998352ADC7B890019D9F2 /* Assets.xcassets */; };
@@ -21,6 +24,8 @@
 		18D9986A2ADC99A60019D9F2 /* ActivitiesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998692ADC99A60019D9F2 /* ActivitiesListViewModel.swift */; };
 		18D9986C2ADC99C30019D9F2 /* ActivitiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D9986B2ADC99C30019D9F2 /* ActivitiesListView.swift */; };
 		18D9986E2ADCCF700019D9F2 /* ActivityCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D9986D2ADCCF700019D9F2 /* ActivityCategory.swift */; };
+		18D998712ADCEBC90019D9F2 /* ActivitiesChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998702ADCEBC90019D9F2 /* ActivitiesChartsView.swift */; };
+		18D998732ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998722ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +46,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18158D002ADD75B600789A59 /* ActivityChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityChartView.swift; sourceTree = "<group>"; };
+		18158D032ADD78A700789A59 /* Calendar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Calendar+Extensions.swift"; sourceTree = "<group>"; };
+		18158D052ADD78C500789A59 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		18D9982E2ADC7B880019D9F2 /* ActivityJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActivityJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D998312ADC7B880019D9F2 /* ActivityJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityJournalApp.swift; sourceTree = "<group>"; };
 		18D998332ADC7B880019D9F2 /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
@@ -57,6 +65,8 @@
 		18D998692ADC99A60019D9F2 /* ActivitiesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListViewModel.swift; sourceTree = "<group>"; };
 		18D9986B2ADC99C30019D9F2 /* ActivitiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesListView.swift; sourceTree = "<group>"; };
 		18D9986D2ADCCF700019D9F2 /* ActivityCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCategory.swift; sourceTree = "<group>"; };
+		18D998702ADCEBC90019D9F2 /* ActivitiesChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsView.swift; sourceTree = "<group>"; };
+		18D998722ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18158CFF2ADD759D00789A59 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				18158D002ADD75B600789A59 /* ActivityChartView.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		18158D022ADD789500789A59 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				18158D032ADD78A700789A59 /* Calendar+Extensions.swift */,
+				18158D052ADD78C500789A59 /* Date+Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		18D998252ADC7B880019D9F2 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +141,7 @@
 				18D998382ADC7B890019D9F2 /* Preview Content */,
 				18D9985D2ADC850E0019D9F2 /* Resources */,
 				18D9985C2ADC84AB0019D9F2 /* Scenes */,
+				18158D022ADD789500789A59 /* Utils */,
 			);
 			path = ActivityJournal;
 			sourceTree = "<group>";
@@ -146,6 +174,7 @@
 		18D9985C2ADC84AB0019D9F2 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				18D9986F2ADCEBA70019D9F2 /* ActivitiesCharts */,
 				18D998682ADC998E0019D9F2 /* ActivitiesList */,
 				18D9985F2ADC85340019D9F2 /* ActivityDetail */,
 			);
@@ -184,6 +213,16 @@
 				18D9986B2ADC99C30019D9F2 /* ActivitiesListView.swift */,
 			);
 			path = ActivitiesList;
+			sourceTree = "<group>";
+		};
+		18D9986F2ADCEBA70019D9F2 /* ActivitiesCharts */ = {
+			isa = PBXGroup;
+			children = (
+				18158CFF2ADD759D00789A59 /* Charts */,
+				18D998702ADCEBC90019D9F2 /* ActivitiesChartsView.swift */,
+				18D998722ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift */,
+			);
+			path = ActivitiesCharts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,11 +357,16 @@
 			files = (
 				18D998342ADC7B880019D9F2 /* ActivityDetailView.swift in Sources */,
 				18D9986E2ADCCF700019D9F2 /* ActivityCategory.swift in Sources */,
+				18D998712ADCEBC90019D9F2 /* ActivitiesChartsView.swift in Sources */,
 				18D9986C2ADC99C30019D9F2 /* ActivitiesListView.swift in Sources */,
+				18D998732ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift in Sources */,
+				18158D062ADD78C500789A59 /* Date+Extensions.swift in Sources */,
 				18D9986A2ADC99A60019D9F2 /* ActivitiesListViewModel.swift in Sources */,
+				18158D012ADD75B600789A59 /* ActivityChartView.swift in Sources */,
 				18D998322ADC7B880019D9F2 /* ActivityJournalApp.swift in Sources */,
 				18D998662ADC85E10019D9F2 /* Activity.swift in Sources */,
 				18D998622ADC858E0019D9F2 /* ActivityDetailViewModel.swift in Sources */,
+				18158D042ADD78A700789A59 /* Calendar+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
