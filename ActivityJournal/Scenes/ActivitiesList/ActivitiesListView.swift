@@ -60,6 +60,9 @@ struct ActivitiesListView: View {
                     viewModel.deleteActivity(at: indexSet)
                 })
             }
+            .navigationDestination(for: Activity.self) { activity in
+                ActivityDetailView(viewModel: .init(activity: activity))
+            }
         }
     }
     
