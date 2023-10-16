@@ -40,4 +40,24 @@ class ActivitiesListViewModel: ObservableObject {
             print("Activities fetch failed. Error: \(error)")
         }
     }
+    
+    func generateMockData() {
+        // Activity categories
+        let sportActivity = Activity(title: "Pratice Sports",  activityDescription: "Any sport counts!", category: .sport)
+        let studyActivity = Activity(title: "Study",  activityDescription: "Any study activity counts!", category: .study)
+        modelContext.insert(sportActivity)
+        modelContext.insert(studyActivity)
+
+        // Generate past day activity logs
+        let currentDate = Date()
+        let secondsPerDay: Double = 86400
+        for dayCount in 0..<100 {
+            let newPastDate = currentDate.addingTimeInterval(-(Double(dayCount) * secondsPerDay))
+            sportActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
+            studyActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
+        }
+        
+        // Manually fetch
+        fetchActivities()
+    }
 }

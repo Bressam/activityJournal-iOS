@@ -13,7 +13,18 @@ class Activity {
     var title: String
     var activityDescription: String
     var category: ActivityCategory
-    var loggedData: [LoggedData]
+
+    @Relationship(deleteRule: .cascade)
+    var loggedData: [LoggedData] = []
+    
+    @Transient
+    var sortedLoggedData: [LoggedData] {
+        get {
+            return loggedData.sorted(by: { $0.date > $1.date })
+        } set {
+            loggedData = newValue
+        }
+    }
     
     init(title: String = "",
          activityDescription: String = "",

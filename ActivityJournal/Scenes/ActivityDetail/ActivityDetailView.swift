@@ -36,7 +36,7 @@ struct ActivityDetailView: View {
     private var activityLogSection: some View {
         Section {
             List {
-                ForEach($viewModel.activity.loggedData) { loggedData in
+                ForEach($viewModel.activity.sortedLoggedData) { loggedData in
                     HStack {
                         DatePicker("Date", selection: loggedData.date)
                     }
