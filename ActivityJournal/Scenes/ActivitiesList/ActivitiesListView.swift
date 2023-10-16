@@ -27,6 +27,7 @@ struct ActivityItem: View {
 
 struct ActivitiesListView: View {
     @ObservedObject var viewModel: ActivitiesListViewModel
+    @State private var showingAlert = false
     @State private var path = NavigationPath()
     
     var body: some View {
@@ -47,7 +48,7 @@ struct ActivitiesListView: View {
     }
     
     @ViewBuilder
-    var activitiesList: some View {
+    private var activitiesList: some View {
         if viewModel.activities.isEmpty {
             emptyItemsView
         } else {
@@ -65,11 +66,24 @@ struct ActivitiesListView: View {
             }
         }
     }
-    
-    var emptyItemsView: some View {
-        ContentUnavailableView("Empty Activities",
-                               systemImage: "mail.stack",
-                               description: Text("Please create a new activity with button above."))
+
+    private var emptyItemsView: some View {
+        ContentUnavailableView(label: {
+            Label("Empty Activities", systemImage: "mail.stack")
+        }, description: {
+            Text("Please create a new activity with button above or batch generate mock data.")
+        }, actions: {
+            Button(action: {
+                showingAlert = true
+            }) {
+                Text("Generate past data")
+            }.alert("Generate past data", isPresented: $showingAlert, actions: {
+                Button("Generate", role: .none) { viewModel.generateMockData() }
+                Button("Cancel", role: .cancel) { }
+            }, message: {
+                Text("This will generate some history mock data. Useful to test charts without having to manually generate all data.")
+            })
+        })
     }
     
     private var animatedAddButton: some View {

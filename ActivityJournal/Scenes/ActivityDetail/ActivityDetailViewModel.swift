@@ -22,7 +22,7 @@ class ActivityDetailViewModel {
     
     func deleteActivity(at indexSet: IndexSet) {
         for index in indexSet {
-            activity.loggedData.remove(at: index)
+            activity.sortedLoggedData.remove(at: index)
         }
     }
 }

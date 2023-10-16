@@ -13,36 +13,43 @@ struct ActivityDetailView: View {
     
     var body: some View {
         Form {
-            Section("Activity details") {
-                TextField("Title", text: $viewModel.activity.title)
-                TextField("Description", text: $viewModel.activity.activityDescription)
-                    .lineLimit(2, reservesSpace: true)
-                Picker("Category", selection: $viewModel.activity.category) {
-                    ForEach(ActivityCategory.allCases, id: \.self) { category in
-                        Text(category.name).tag(category)
-                    }
-                }
-            }
-            Section {
-                List {
-                    ForEach($viewModel.activity.loggedData) { loggedData in
-                        HStack {
-                            DatePicker("Date", selection: loggedData.date)
-                        }
-                    }.onDelete(perform: { indexSet in
-                        viewModel.deleteActivity(at: indexSet)
-                    })
-                }
-            } header: {
-                activityLogsHeader
-            }
-            
+            detailsSection
+            activityLogSection
         }
         .navigationTitle("Edit activity")
         .navigationBarTitleDisplayMode(.inline)
     }
     
-    var activityLogsHeader: some View {
+    private var detailsSection: some View {
+        Section("Activity details") {
+            TextField("Title", text: $viewModel.activity.title)
+            TextField("Description", text: $viewModel.activity.activityDescription)
+                .lineLimit(2, reservesSpace: true)
+            Picker("Category", selection: $viewModel.activity.category) {
+                ForEach(ActivityCategory.allCases, id: \.self) { category in
+                    Text(category.name).tag(category)
+                }
+            }
+        }
+    }
+    
+    private var activityLogSection: some View {
+        Section {
+            List {
+                ForEach($viewModel.activity.sortedLoggedData) { loggedData in
+                    HStack {
+                        DatePicker("Date", selection: loggedData.date)
+                    }
+                }.onDelete(perform: { indexSet in
+                    viewModel.deleteActivity(at: indexSet)
+                })
+            }
+        } header: {
+            activityLogsHeader
+        }
+    }
+    
+    private var activityLogsHeader: some View {
         HStack {
             Text("Activity Log")
             Spacer()
@@ -59,11 +66,7 @@ struct ActivityDetailView: View {
 }
 
 #Preview {
-    do {
-        var dummyActivity: Activity = .init(title: "Test", loggedData: [])
-        let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity)
-        return ActivityDetailView(viewModel: dummyViewModel)
-    } catch let error {
-        fatalError("Failed to create ModelContainer for Activity. Error: \(error)")
-    }
+    let dummyActivity: Activity = .init(title: "Test", loggedData: [])
+    let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity)
+    return ActivityDetailView(viewModel: dummyViewModel)
 }
