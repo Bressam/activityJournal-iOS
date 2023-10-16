@@ -6,12 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct ActivityJournalApp: App {
+    let container: ModelContainer
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ActivitiesListView(viewModel: .init(modelContext: container.mainContext))
+                .modelContext(container.mainContext)
+        }
+    }
+    
+    init() {
+        do {
+            container = try ModelContainer(for: Activity.self)
+        } catch let error {
+            print(error)
+            fatalError("Failed to create ModelContainer for Activity.")
         }
     }
 }
