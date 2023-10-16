@@ -58,8 +58,12 @@ class ActivitiesListViewModel: ObservableObject {
         for dayCount in 0..<100 {
             let newPastDate = currentDate.addingTimeInterval(-(Double(dayCount) * secondsPerDay))
             sportActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
-            sport2Activity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
-            studyActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
+            if dayCount % 2 == 0 {
+                sport2Activity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
+            }
+            if dayCount % 3 == 0 {
+                studyActivity.loggedData.append(LoggedData(date: newPastDate, notes: "Dummy note \(dayCount)"))
+            }
         }
         
         // Manually fetch
