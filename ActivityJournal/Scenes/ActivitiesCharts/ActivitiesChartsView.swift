@@ -13,20 +13,50 @@ struct ActivitiesChartsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(viewModel.activitiesByCategory) { activityByCategory in
-                        ActivityChartView(activityByCategory: activityByCategory, activity: viewModel.getActivity(by: activityByCategory.category))
-                    }
-                }
-                .scrollTargetLayout()
-            }
-            .scrollTargetBehavior(.viewAligned)
-            .navigationTitle("Monthly progress")
-            .modifier(JournalNavigationStyle())
+            listOfCategories
+                .padding(.horizontal, 16)
+                .navigationTitle("Monthly progress")
+                .modifier(JournalNavigationStyle())
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
+    }
+    
+    private var listOfCategories: some View {
+        ScrollView {
+            VStack(alignment: .leading) {
+                ForEach(viewModel.activitiesByCategory) { activityByCategory in
+                    chartsCategorySection(activityByCategory: activityByCategory)
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.viewAligned)
+    }
+    
+    private func chartsCategorySection(activityByCategory: ActivityByCategory) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(activityByCategory.category.description.capitalized)
+                .foregroundStyle(activityByCategory.category.chartDataColor.gradient)
+                .font(.title.bold())
+            activitiesChartsList(activityByCategory: activityByCategory)
+        }
+        .padding([.bottom], 12)
+        .containerRelativeFrame(.vertical) { lenght, axis in
+            return lenght / 2.3
+        }
+    }
+    
+    private func activitiesChartsList(activityByCategory: ActivityByCategory) -> some View {
+        ScrollView(.horizontal) {
+            HStack {
+                ForEach(activityByCategory.activitiesChartsData) { activitiesChartsData in
+                    ActivityChartView(activity: viewModel.getActivity(by: activitiesChartsData.id),
+                                      activityChartData: activitiesChartsData)
+                    .cornerRadius(15)
+                }
+            }.scrollTargetLayout()
+        }.scrollTargetBehavior(.viewAligned)
     }
 }
 

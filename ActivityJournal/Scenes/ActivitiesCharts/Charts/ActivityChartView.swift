@@ -7,15 +7,17 @@
 
 import SwiftUI
 import Charts
+import SwiftData
 
 struct ActivityChartView: View {
-    @State var activityByCategory: ActivityByCategory
     var activity: Activity?
+    @State var activityChartData: ActivityChartData
     @State private var showingPopover = false
     
     var body: some View {
-        if activityByCategory.monthlyData.isEmpty {
+        if activityChartData.monthlyData.isEmpty {
             emptyDataView
+                .padding(16)
                 .containerRelativeFrame(.horizontal)
         } else {
             activityLogChartView
@@ -24,31 +26,35 @@ struct ActivityChartView: View {
         }
     }
     
+    @ViewBuilder
     private var emptyDataView: some View {
+        let activityTitle = activityChartData.title.isEmpty ? "Unamed Activity" : activityChartData.title
         ZStack {
             ContentUnavailableView(label: {
-                Label("No content for category: \(String(describing: activityByCategory.category))",
+                Label("No logged data for activity: \(activityTitle)",
                       systemImage: "chart.line.uptrend.xyaxis.circle")
                 .symbolEffect(.pulse.byLayer)
             }, description: {
                 Text("New data will appear when logged at the activity details.")
                 addLogToActivityButton(buttonTitle: "Do you want to log data?")
             })
-        }.background(activityByCategory.category.chartDataColor.opacity(0.6).gradient)
+        }
+        .background(activityChartData.category.chartDataColor.opacity(0.6).gradient)
+        .clipShape(.rect(cornerRadius: 16))
     }
     
     private var activityLogChartView: some View {
         VStack(alignment: .leading) {
             chartHeaderView
             Chart {
-                ForEach(activityByCategory.monthlyData) { monthActivity in
+                ForEach(activityChartData.monthlyData) { monthActivity in
                     BarMark(x: .value("Month", monthActivity.date, unit: .month),
                             y: .value("Logs", monthActivity.activitiesCount))
-                    .foregroundStyle(activityByCategory.category.chartDataColor.gradient)
+                    .foregroundStyle(activityChartData.category.chartDataColor.gradient)
                 }
                 
-                if let monthlyGoal = activityByCategory.monthlyGoal {
-                    let markerColor = activityByCategory.category.chartGoalMarkerColor
+                if let monthlyGoal = activityChartData.monthlyGoal {
+                    let markerColor = activityChartData.category.chartGoalMarkerColor
                     RuleMark(y: .value("Monthly Goal", monthlyGoal))
                         .foregroundStyle(markerColor)
                         .lineStyle(StrokeStyle(lineWidth:1, dash: [5]))
@@ -58,16 +64,18 @@ struct ActivityChartView: View {
                                 .foregroundStyle(markerColor)
                         }
                 }
+            }.chartXAxis {
+                AxisMarks(values:  .automatic(desiredCount: 12))
             }
         }
     }
     
     @ViewBuilder
     private var chartHeaderView: some View {
+        let chartTitle = activity?.title.isEmpty == true ? "Unamed activity" : activity?.title
         HStack {
-            Text( "\(activityByCategory.category.description.capitalized)")
-                .font(.title)
-                .foregroundStyle(activityByCategory.category.chartDataColor.gradient)
+            Text(chartTitle ?? "Unamed activity")
+                .font(.title2)
             Spacer()
             addLogToActivityButton(buttonTitle: "Log data")
         }
@@ -110,10 +118,12 @@ struct ActivityChartView: View {
     ]
     
     // Force empty data
-    monthlyActivities = []
-
-    return ActivityChartView(activityByCategory: .init(category: .none,
-                                                       monthlyData: monthlyActivities,
-                                                       monthlyGoal: 25),
-                             activity: .init())
+//    monthlyActivities = []
+    let activity: Activity = .init()
+    return ActivityChartView(activity: activity,
+                             activityChartData: .init(id: activity.id,
+                                                      title: "Chart Title",
+                                                      category: .none,
+                                                      monthlyData: monthlyActivities,
+                                                      monthlyGoal: 25))
 }
