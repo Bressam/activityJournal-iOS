@@ -14,7 +14,7 @@ struct ActivityItem: View {
     var body: some View {
         let latestLog = activity.loggedData.sorted(by: {$0.date > $1.date }).first
         let latestLogText: String = latestLog?.date.formatted(date: .long, time: .omitted) ?? "Not available"
-
+        
         HStack(alignment: .center) {
             Text(activity.category.emoji)
             VStack(alignment: .leading) {
@@ -66,7 +66,7 @@ struct ActivitiesListView: View {
             }
         }
     }
-
+    
     private var emptyItemsView: some View {
         ContentUnavailableView(label: {
             Label("Empty Activities", systemImage: "mail.stack")
@@ -101,11 +101,7 @@ struct ActivitiesListView: View {
 }
 
 #Preview {
-    do {
-        let activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: true)
-        activitiesService.generateMockData()
-        return ActivitiesListView(viewModel: .init(activitiesService: activitiesService))
-    } catch let error {
-        fatalError("Preview: Failed to setup Activity container. \(error)")
-    }
+    let activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: true)
+    activitiesService.generateMockData()
+    return ActivitiesListView(viewModel: .init(activitiesService: activitiesService))
 }
