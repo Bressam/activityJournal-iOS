@@ -10,11 +10,20 @@ import SwiftData
 
 class LocalActivityDataProvider: ActivityDataProvider {
     // MARK: - Properties
-    var modelContext: ModelContext
-    
+    private var container: ModelContainer
+    private var modelContext: ModelContext
+
     // MARK: - Init & Setup
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
+    @MainActor
+    init() {
+        do {
+            self.container = try ModelContainer(for: Activity.self)
+        } catch let error {
+            print(error)
+            fatalError("Failed to create ModelContainer for Activity.")
+        }
+
+        self.modelContext = container.mainContext
     }
     
     // MARK: - Data operations

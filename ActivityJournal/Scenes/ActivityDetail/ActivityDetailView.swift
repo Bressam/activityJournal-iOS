@@ -53,7 +53,7 @@ struct ActivityDetailView: View {
                 .lineLimit(2, reservesSpace: true)
             TextField("Monthly Goal", value: $viewModel.activity.monthlyGoal,
                       format: .number)
-                .keyboardType(.numbersAndPunctuation)
+            .keyboardType(.numbersAndPunctuation)
             Picker("Category", selection: $viewModel.activity.category) {
                 ForEach(ActivityCategory.allCases, id: \.self) { category in
                     Text(category.name).tag(category)

@@ -122,8 +122,8 @@ struct ActivityChartView: View {
     ]
     
     // Force empty data
-//    let emptymonthlyActivities: [MonthlyActivitiesData] = []
-
+    // let emptymonthlyActivities: [MonthlyActivitiesData] = []
+    
     let activity: Activity = .init()
     return ActivityChartView(activity: activity,
                              activityChartData: .init(id: activity.id,

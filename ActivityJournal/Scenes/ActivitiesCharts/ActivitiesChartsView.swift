@@ -10,7 +10,7 @@ import SwiftData
 
 struct ActivitiesChartsView: View {
     @ObservedObject var viewModel: ActivitiesChartsViewModel
-
+    
     var body: some View {
         NavigationStack {
             contentView
@@ -80,8 +80,7 @@ struct ActivitiesChartsView: View {
 }
 
 #Preview {
-        let mockedProvider = ActivityDataProviderMock()
-        let activitiesService = ActivitiesService(localDataProvider: mockedProvider)
-//        activitiesService.generateMockData()
-        return ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService))
+    let activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: true)
+    //        activitiesService.generateMockData()
+    return ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService))
 }
