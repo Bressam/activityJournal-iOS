@@ -14,11 +14,13 @@ class ActivitiesListViewModel: ObservableObject {
     @Published var activities: [Activity]
     
     
+    // MARK: - Init
     init(activitiesService: ActivitiesService, activities: [Activity] = []) {
         self.activitiesService = activitiesService
         self.activities = activities
     }
     
+    // MARK: - Data Handling
     func createActivity() -> Activity {
         let activity = activitiesService.createActivity()
         fetchActivities()

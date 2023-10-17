@@ -9,36 +9,30 @@ import Foundation
 import SwiftData
 
 class ActivitiesChartsViewModel: ObservableObject {
+    // MARK: - Properties
+    private let activitiesService: ActivitiesService
+    @Published var activitiesByCategory: [ActivityByCategory] = []
     private var activities: [Activity] = [] {
         didSet {
             generateChartData()
         }
     }
-    @Published var activitiesByCategory: [ActivityByCategory] = []
-    private var modelContext: ModelContext
     
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
+    // MARK: - Init
+    init(activitiesService: ActivitiesService) {
+        self.activitiesService = activitiesService
     }
     
+    // MARK: - Data Handling
     func fetchActivities() {
-        do {
-            let descriptor = FetchDescriptor<Activity>(sortBy: [SortDescriptor(\.title)])
-            activities = try modelContext.fetch(descriptor)
-        } catch let error {
-            print("Activities fetch failed. Error: \(error)")
-        }
+        activities = activitiesService.fetchActivities()
     }
     
     func getActivity(by id: PersistentIdentifier) -> Activity? {
         return activities.first(where: { $0.id == id })
     }
     
-    
-    // Lista de categorias [ActivityByCategory]
-    // Cada categoria com lsita de graficos -> activitiesChartsData: [ActivityChartData]
-
-    
+    // MARK: - Chart data setup
     private func generateChartData() {
         var activitiesByCategory: [ActivityByCategory] = .init()
 
@@ -65,12 +59,7 @@ class ActivitiesChartsViewModel: ObservableObject {
                 activitiesByCategory.append(activityCategoryData)
             }
         }
-        
-        // Each Activity user created
-//        for activity in activities {
-//            
-//        }
-        
+
         // Notify listeners
         self.activitiesByCategory = activitiesByCategory
     }

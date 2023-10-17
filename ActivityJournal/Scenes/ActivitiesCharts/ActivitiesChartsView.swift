@@ -13,12 +13,31 @@ struct ActivitiesChartsView: View {
 
     var body: some View {
         NavigationStack {
-            listOfCategories
-                .padding(.horizontal, 16)
+            contentView
                 .navigationTitle("Monthly progress")
                 .modifier(JournalNavigationStyle())
         }.onAppear(perform: {
             viewModel.fetchActivities()
+        })
+    }
+    
+    @ViewBuilder
+    private var contentView: some View {
+        if viewModel.activitiesByCategory.isEmpty {
+            emptyItemsView
+        } else {
+            listOfCategories
+                .padding(.horizontal, 16)
+        }
+    }
+    
+    private var emptyItemsView: some View {
+        ContentUnavailableView(label: {
+            Label("No activity found.",
+                  systemImage: "chart.line.uptrend.xyaxis.circle")
+            .symbolEffect(.pulse.byLayer)
+        }, description: {
+            Text("You can check your progress and charts when an activity is created")
         })
     }
     
@@ -61,13 +80,8 @@ struct ActivitiesChartsView: View {
 }
 
 #Preview {
-    do {
-        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Activity.self,
-                                           configurations: configuration)
-        return ActivitiesChartsView(viewModel: .init(modelContext: container.mainContext))
-            .modelContainer(container)
-    } catch let error {
-        fatalError("Preview: Failed to setup Activities charts container. \(error)")
-    }
+        let mockedProvider = ActivityDataProviderMock()
+        let activitiesService = ActivitiesService(localDataProvider: mockedProvider)
+//        activitiesService.generateMockData()
+        return ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService))
 }

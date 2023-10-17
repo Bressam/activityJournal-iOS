@@ -19,7 +19,7 @@ struct ActivityJournalApp: App {
                 ActivitiesListView(viewModel: .init(activitiesService: activitiesService))
                     .modelContext(container.mainContext)
                     .tabItem { Label("List", systemImage: "mail.stack") }
-                ActivitiesChartsView(viewModel: .init(modelContext: container.mainContext))
+                ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService))
                     .modelContext(container.mainContext)
                     .tabItem { Label("Charts", systemImage: "chart.line.uptrend.xyaxis.circle") }
             }

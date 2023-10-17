@@ -103,7 +103,7 @@ struct ActivityChartView: View {
 
 #Preview {
     let calendar = Calendar(identifier: .gregorian)
-    var monthlyActivities: [MonthlyActivitiesData] = [
+    let monthlyActivities: [MonthlyActivitiesData] = [
         .init(activitiesCount: 30,
               date: calendar.makeDate(year: 2023,
                                       month: 1)),
@@ -122,7 +122,8 @@ struct ActivityChartView: View {
     ]
     
     // Force empty data
-//    monthlyActivities = []
+//    let emptymonthlyActivities: [MonthlyActivitiesData] = []
+
     let activity: Activity = .init()
     return ActivityChartView(activity: activity,
                              activityChartData: .init(id: activity.id,
