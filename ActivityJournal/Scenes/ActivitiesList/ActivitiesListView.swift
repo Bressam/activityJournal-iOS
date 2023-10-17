@@ -102,11 +102,9 @@ struct ActivitiesListView: View {
 
 #Preview {
     do {
-        let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Activity.self,
-                                           configurations: configuration)
-        return ActivitiesListView(viewModel: .init(activitiesService: .init(localDataProvider: ActivityDataProviderMock())))
-            .modelContainer(container)
+        let activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: true)
+        activitiesService.generateMockData()
+        return ActivitiesListView(viewModel: .init(activitiesService: activitiesService))
     } catch let error {
         fatalError("Preview: Failed to setup Activity container. \(error)")
     }
