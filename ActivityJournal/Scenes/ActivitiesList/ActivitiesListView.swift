@@ -105,7 +105,7 @@ struct ActivitiesListView: View {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Activity.self,
                                            configurations: configuration)
-        return ActivitiesListView(viewModel: .init(modelContext: container.mainContext))
+        return ActivitiesListView(viewModel: .init(activitiesService: .init(localDataProvider: ActivityDataProviderMock())))
             .modelContainer(container)
     } catch let error {
         fatalError("Preview: Failed to setup Activity container. \(error)")

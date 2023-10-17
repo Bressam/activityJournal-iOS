@@ -10,14 +10,17 @@ import SwiftData
 
 @Observable
 class ActivityDetailViewModel {
+    // MARK: - Properties
     var activity: Activity
     
+    // MARK: - Init
     init(activity: Activity) {
         self.activity = activity
     }
     
+    // MARK: - Data handling
     func logActivity() {
-        return activity.loggedData.append(.init())
+        activity.loggedData.append(.init())
     }
     
     func deleteActivity(at indexSet: IndexSet) {
