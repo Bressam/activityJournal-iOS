@@ -71,7 +71,10 @@ struct ActivitiesChartsView: View {
             HStack {
                 ForEach(activityByCategory.activitiesChartsData) { activitiesChartsData in
                     ActivityChartView(activity: viewModel.getActivity(by: activitiesChartsData.id),
-                                      activityChartData: activitiesChartsData)
+                                      activityChartData: activitiesChartsData,
+                                      didDismissActivityDefail: {
+                        viewModel.fetchActivities()
+                    })
                     .cornerRadius(15)
                 }
             }.scrollTargetLayout()
