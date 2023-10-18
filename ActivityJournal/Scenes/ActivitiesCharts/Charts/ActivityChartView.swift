@@ -13,6 +13,7 @@ struct ActivityChartView: View {
     var activity: Activity?
     @State var activityChartData: ActivityChartData
     @State private var showingPopover = false
+    var didDismissActivityDefail: (() -> Void)? = nil
     
     var body: some View {
         if activityChartData.monthlyData.isEmpty {
@@ -94,7 +95,8 @@ struct ActivityChartView: View {
             showingPopover = true
         }
         .fontWeight(.medium)
-        .popover(isPresented: $showingPopover) {
+        .sheet(isPresented: $showingPopover,
+               onDismiss: didDismissActivityDefail) {
             ActivityDetailView(isModallyPresented: true,
                                viewModel: .init(activity: activity!))
         }
