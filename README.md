@@ -1,6 +1,3 @@
-# Video de apresentação
-https://youtu.be/G-wFoJy0BFM
-
 # Activity Journal - iOS
 This project is an study and application of Uncle Bob's clean code.
 The project also uses **cutting edge iOS development** features, such as newest features of **SwiftUI** and **iOS 17**. Also uses **SwiftData** as database, presented on WWDC 2023 and only available to iOS 17.
