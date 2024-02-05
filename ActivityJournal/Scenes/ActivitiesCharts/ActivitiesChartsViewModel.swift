@@ -10,6 +10,7 @@ import SwiftData
 
 class ActivitiesChartsViewModel: ObservableObject {
     // MARK: - Properties
+    private let analyticsService: AnalyticsService
     private let activitiesService: ActivitiesService
     @Published var activitiesByCategory: [ActivityByCategory] = []
     private var activities: [Activity] = [] {
@@ -19,8 +20,9 @@ class ActivitiesChartsViewModel: ObservableObject {
     }
     
     // MARK: - Init
-    init(activitiesService: ActivitiesService) {
+    init(activitiesService: ActivitiesService, analyticsService: AnalyticsService) {
         self.activitiesService = activitiesService
+        self.analyticsService = analyticsService
     }
     
     // MARK: - Data Handling
@@ -77,5 +79,15 @@ class ActivitiesChartsViewModel: ObservableObject {
         }
         
         return chartMonthActivities
+    }
+    
+    func getActivityDetailViewModel(activity: Activity) -> ActivityDetailViewModel {
+        return .init(activity: activity, analyticsService: analyticsService)
+    }
+}
+
+extension ActivitiesChartsViewModel {
+    func onViewAppear() {
+        analyticsService.logScreenEvent(screenName: "activity_charts_list")
     }
 }

@@ -15,6 +15,7 @@ struct ActivityChartView: View {
     @State var activityChartData: ActivityChartData
     @State private var showingPopover = false
     var didDismissActivityDefail: (() -> Void)? = nil
+    let logActivityHandler: (Activity) -> ActivityDetailView
     
     var body: some View {
         if activityChartData.monthlyData.isEmpty {
@@ -101,8 +102,7 @@ struct ActivityChartView: View {
         .fontWeight(.medium)
         .sheet(isPresented: $showingPopover,
                onDismiss: didDismissActivityDefail) {
-            ActivityDetailView(isModallyPresented: true,
-                               viewModel: .init(activity: activity!))
+            return logActivityHandler(activity!)
         }
     }
 
@@ -138,11 +138,17 @@ struct ActivityChartView: View {
     // Force empty data
     // let emptymonthlyActivities: [MonthlyActivitiesData] = []
     
+    let dummyAnalyticsService = AnalyticsServiceFactory.shared.createAnalyticsServiceFactory(config: .mocked)
     let activity: Activity = .init()
     return ActivityChartView(activity: activity,
                              activityChartData: .init(id: activity.id,
                                                       title: "Chart Title",
                                                       category: .none,
                                                       monthlyData: monthlyActivities,
-                                                      monthlyGoal: 25))
+                                                      monthlyGoal: 25),
+                             logActivityHandler: { chartActivity in
+        return ActivityDetailView(isModallyPresented: true,
+                                  viewModel: .init(activity: chartActivity,
+                                                   analyticsService: dummyAnalyticsService))
+    })
 }

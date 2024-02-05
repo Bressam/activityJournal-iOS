@@ -15,13 +15,14 @@ struct ActivityJournalApp: App {
 
     // MARK: - Services
     let activitiesService: ActivitiesService
+    let analyticsService: AnalyticsService
 
     var body: some Scene {
         WindowGroup {
             TabView {
-                ActivitiesListView(viewModel: .init(activitiesService: activitiesService))
+                ActivitiesListView(viewModel: .init(activitiesService: activitiesService, analyticsService: analyticsService))
                     .tabItem { Label("List", systemImage: "mail.stack") }
-                ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService))
+                ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService, analyticsService: analyticsService))
                     .tabItem { Label("Charts", systemImage: "chart.line.uptrend.xyaxis.circle") }
             }
         }
@@ -30,5 +31,9 @@ struct ActivityJournalApp: App {
     init() {
         // Services creation
         activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: false)
+
+        // Analytics
+        analyticsService = AnalyticsServiceFactory.shared.createAnalyticsServiceFactory(config: .firebase)
+        appDelegate.analyticsService = analyticsService
     }
 }

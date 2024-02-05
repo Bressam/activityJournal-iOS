@@ -11,11 +11,13 @@ import SwiftData
 @Observable
 class ActivityDetailViewModel {
     // MARK: - Properties
+    var analyticsService: AnalyticsService
     var activity: Activity
     
     // MARK: - Init
-    init(activity: Activity) {
+    init(activity: Activity, analyticsService: AnalyticsService) {
         self.activity = activity
+        self.analyticsService = analyticsService
     }
     
     // MARK: - Data handling
@@ -27,5 +29,12 @@ class ActivityDetailViewModel {
         for index in indexSet {
             activity.sortedLoggedData.remove(at: index)
         }
+    }
+}
+
+// MARK: - Analytics Service
+extension ActivityDetailViewModel {
+    func onViewAppear() {
+        analyticsService.logScreenEvent(screenName: "activity_detail")
     }
 }

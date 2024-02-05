@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import FirebaseAnalytics
 
 struct ActivityDetailView: View {
     private let viewtitle: String = "Edit activity"
@@ -18,6 +17,7 @@ struct ActivityDetailView: View {
          viewModel: ActivityDetailViewModel) {
         self.isModallyPresented = isModallyPresented
         self.viewModel = viewModel
+        viewModel.onViewAppear()
     }
     
     var body: some View {
@@ -33,7 +33,6 @@ struct ActivityDetailView: View {
         }
         .navigationTitle(viewtitle)
         .navigationBarTitleDisplayMode(.inline)
-        .analyticsScreen(name: "activity_detail")
     }
     
     @ViewBuilder
@@ -98,7 +97,9 @@ struct ActivityDetailView: View {
 
 #Preview {
     let dummyActivity: Activity = .init(title: "Test", loggedData: [])
-    let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity)
+    let dummyAnalyticsService: AnalyticsService = AnalyticsServiceFactory.shared.createAnalyticsServiceFactory(config: .mocked)
+    let dummyViewModel: ActivityDetailViewModel = .init(activity: dummyActivity,
+                                                        analyticsService: dummyAnalyticsService)
     return ActivityDetailView(isModallyPresented: true,
                               viewModel: dummyViewModel)
 }

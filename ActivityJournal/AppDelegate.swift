@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
-import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    // MARK: Properties needed for initializaation
+    var analyticsService: AnalyticsService?
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
+        analyticsService?.setup()
         return true
     }
 }

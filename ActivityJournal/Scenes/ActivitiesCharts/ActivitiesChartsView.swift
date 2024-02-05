@@ -11,6 +11,12 @@ import SwiftData
 struct ActivitiesChartsView: View {
     @ObservedObject var viewModel: ActivitiesChartsViewModel
     
+    init(viewModel: ActivitiesChartsViewModel) {
+        self.viewModel = viewModel
+
+        viewModel.onViewAppear()
+    }
+    
     var body: some View {
         NavigationStack {
             contentView
@@ -19,7 +25,6 @@ struct ActivitiesChartsView: View {
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
-        .analyticsScreen(name: "activity_charts_list")
     }
     
     @ViewBuilder
@@ -75,16 +80,23 @@ struct ActivitiesChartsView: View {
                                       activityChartData: activitiesChartsData,
                                       didDismissActivityDefail: {
                         viewModel.fetchActivities()
-                    })
+                    }, logActivityHandler: getActivityDetailView)
                     .cornerRadius(15)
                 }
             }.scrollTargetLayout()
         }.scrollTargetBehavior(.viewAligned)
+    }
+    
+    func getActivityDetailView(activity: Activity) -> ActivityDetailView {
+        let activityDetailViewModel = viewModel.getActivityDetailViewModel(activity: activity)
+        return ActivityDetailView(isModallyPresented: true,
+                                  viewModel: activityDetailViewModel)
     }
 }
 
 #Preview {
     let activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: true)
     //        activitiesService.generateMockData()
-    return ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService))
+    let dummyAnalyticsService = AnalyticsServiceFactory.shared.createAnalyticsServiceFactory(config: .mocked)
+    return ActivitiesChartsView(viewModel: .init(activitiesService: activitiesService, analyticsService: dummyAnalyticsService))
 }

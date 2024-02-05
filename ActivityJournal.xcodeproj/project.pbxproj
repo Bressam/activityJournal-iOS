@@ -41,6 +41,18 @@
 		18D9986E2ADCCF700019D9F2 /* ActivityCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D9986D2ADCCF700019D9F2 /* ActivityCategory.swift */; };
 		18D998712ADCEBC90019D9F2 /* ActivitiesChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998702ADCEBC90019D9F2 /* ActivitiesChartsView.swift */; };
 		18D998732ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D998722ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift */; };
+		18F7BF492B71861C001D50A8 /* AnalyticsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF482B71861C001D50A8 /* AnalyticsLogger.swift */; };
+		18F7BF4A2B71861C001D50A8 /* AnalyticsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF482B71861C001D50A8 /* AnalyticsLogger.swift */; };
+		18F7BF4B2B71861C001D50A8 /* AnalyticsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF482B71861C001D50A8 /* AnalyticsLogger.swift */; };
+		18F7BF512B7186CD001D50A8 /* AnalyticsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF502B7186CD001D50A8 /* AnalyticsServiceFactory.swift */; };
+		18F7BF522B7186CD001D50A8 /* AnalyticsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF502B7186CD001D50A8 /* AnalyticsServiceFactory.swift */; };
+		18F7BF532B7186CD001D50A8 /* AnalyticsServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF502B7186CD001D50A8 /* AnalyticsServiceFactory.swift */; };
+		18F7BF562B7187FA001D50A8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF552B7187FA001D50A8 /* FirebaseAnalyticsService.swift */; };
+		18F7BF572B7187FA001D50A8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF552B7187FA001D50A8 /* FirebaseAnalyticsService.swift */; };
+		18F7BF582B7187FA001D50A8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF552B7187FA001D50A8 /* FirebaseAnalyticsService.swift */; };
+		18F7BF5A2B719736001D50A8 /* DummyAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF592B719736001D50A8 /* DummyAnalyticsService.swift */; };
+		18F7BF5B2B719736001D50A8 /* DummyAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF592B719736001D50A8 /* DummyAnalyticsService.swift */; };
+		18F7BF5C2B719736001D50A8 /* DummyAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7BF592B719736001D50A8 /* DummyAnalyticsService.swift */; };
 		632A6B2C78CD75EE858AD23B /* Pods_ActivityJournalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053D38517922F314B397017E /* Pods_ActivityJournalTests.framework */; };
 		C016EC42301EBFEFB2AB457B /* Pods_ActivityJournal_ActivityJournalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 131143F442CC54AD7FE7DF32 /* Pods_ActivityJournal_ActivityJournalUITests.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +108,10 @@
 		18D9986D2ADCCF700019D9F2 /* ActivityCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCategory.swift; sourceTree = "<group>"; };
 		18D998702ADCEBC90019D9F2 /* ActivitiesChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsView.swift; sourceTree = "<group>"; };
 		18D998722ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesChartsViewModel.swift; sourceTree = "<group>"; };
+		18F7BF482B71861C001D50A8 /* AnalyticsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsLogger.swift; sourceTree = "<group>"; };
+		18F7BF502B7186CD001D50A8 /* AnalyticsServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceFactory.swift; sourceTree = "<group>"; };
+		18F7BF552B7187FA001D50A8 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
+		18F7BF592B719736001D50A8 /* DummyAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyAnalyticsService.swift; sourceTree = "<group>"; };
 		322A6EC8EAD20A6C859DB916 /* Pods-ActivityJournal-ActivityJournalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActivityJournal-ActivityJournalUITests.release.xcconfig"; path = "Target Support Files/Pods-ActivityJournal-ActivityJournalUITests/Pods-ActivityJournal-ActivityJournalUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7D817C5BAFBF7BD22894B1CD /* Pods_ActivityJournal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ActivityJournal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8035877A9704C27C81D41697 /* Pods-ActivityJournalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ActivityJournalTests.release.xcconfig"; path = "Target Support Files/Pods-ActivityJournalTests/Pods-ActivityJournalTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +195,7 @@
 		18158D132ADDF53200789A59 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				18F7BF472B718609001D50A8 /* Analytics */,
 				18158D142ADDF5F300789A59 /* ActivitiesService.swift */,
 				18158D162ADDF92100789A59 /* LocalActivityDataProvider.swift */,
 				18158D192ADDFC2500789A59 /* ActivityDataProviderMock.swift */,
@@ -312,6 +329,25 @@
 				18D998722ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift */,
 			);
 			path = ActivitiesCharts;
+			sourceTree = "<group>";
+		};
+		18F7BF472B718609001D50A8 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				18F7BF542B7187E2001D50A8 /* Protocols */,
+				18F7BF502B7186CD001D50A8 /* AnalyticsServiceFactory.swift */,
+				18F7BF552B7187FA001D50A8 /* FirebaseAnalyticsService.swift */,
+				18F7BF592B719736001D50A8 /* DummyAnalyticsService.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		18F7BF542B7187E2001D50A8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				18F7BF482B71861C001D50A8 /* AnalyticsLogger.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		746CEFDBE59407622AB4BA92 /* Frameworks */ = {
@@ -578,8 +614,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F7BF562B7187FA001D50A8 /* FirebaseAnalyticsService.swift in Sources */,
 				18D998342ADC7B880019D9F2 /* ActivityDetailView.swift in Sources */,
 				18D9986E2ADCCF700019D9F2 /* ActivityCategory.swift in Sources */,
+				18F7BF5A2B719736001D50A8 /* DummyAnalyticsService.swift in Sources */,
 				18D998712ADCEBC90019D9F2 /* ActivitiesChartsView.swift in Sources */,
 				18D9986C2ADC99C30019D9F2 /* ActivitiesListView.swift in Sources */,
 				18D998732ADCEBD10019D9F2 /* ActivitiesChartsViewModel.swift in Sources */,
@@ -589,11 +627,13 @@
 				18667EA52B70612D00B3721C /* AppDelegate.swift in Sources */,
 				18158D012ADD75B600789A59 /* ActivityChartView.swift in Sources */,
 				18158D152ADDF5F300789A59 /* ActivitiesService.swift in Sources */,
+				18F7BF492B71861C001D50A8 /* AnalyticsLogger.swift in Sources */,
 				18D998322ADC7B880019D9F2 /* ActivityJournalApp.swift in Sources */,
 				18158D122ADDABDC00789A59 /* JournalNavigationStyle.swift in Sources */,
 				18158D1D2ADE111700789A59 /* ActivitiesServiceFactory.swift in Sources */,
 				18D998662ADC85E10019D9F2 /* Activity.swift in Sources */,
 				18158D0B2ADD9D0800789A59 /* MonthlyActivityData.swift in Sources */,
+				18F7BF512B7186CD001D50A8 /* AnalyticsServiceFactory.swift in Sources */,
 				18D998622ADC858E0019D9F2 /* ActivityDetailViewModel.swift in Sources */,
 				18158D042ADD78A700789A59 /* Calendar+Extensions.swift in Sources */,
 				18158D172ADDF92100789A59 /* LocalActivityDataProvider.swift in Sources */,
@@ -605,11 +645,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F7BF5B2B719736001D50A8 /* DummyAnalyticsService.swift in Sources */,
+				18F7BF572B7187FA001D50A8 /* FirebaseAnalyticsService.swift in Sources */,
 				18BEF68F2ADE172300FB27CA /* ActivityCategory.swift in Sources */,
+				18F7BF522B7186CD001D50A8 /* AnalyticsServiceFactory.swift in Sources */,
 				18D998632ADC85910019D9F2 /* ActivityDetailViewModel.swift in Sources */,
 				18D998442ADC7B890019D9F2 /* ActivityServiceTests.swift in Sources */,
 				18667EA62B70612D00B3721C /* AppDelegate.swift in Sources */,
 				18D998672ADC85E10019D9F2 /* Activity.swift in Sources */,
+				18F7BF4A2B71861C001D50A8 /* AnalyticsLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,8 +662,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				18667EA72B70612D00B3721C /* AppDelegate.swift in Sources */,
+				18F7BF4B2B71861C001D50A8 /* AnalyticsLogger.swift in Sources */,
+				18F7BF5C2B719736001D50A8 /* DummyAnalyticsService.swift in Sources */,
+				18F7BF582B7187FA001D50A8 /* FirebaseAnalyticsService.swift in Sources */,
 				18D9984E2ADC7B890019D9F2 /* ActivityJournalUITests.swift in Sources */,
 				18D998502ADC7B890019D9F2 /* ActivityJournalUITestsLaunchTests.swift in Sources */,
+				18F7BF532B7186CD001D50A8 /* AnalyticsServiceFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

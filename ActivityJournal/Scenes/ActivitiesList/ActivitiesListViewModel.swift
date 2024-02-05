@@ -10,14 +10,18 @@ import SwiftData
 
 class ActivitiesListViewModel: ObservableObject {
     // MARK: - Properties
+    private let analyticsService: AnalyticsService
     private let activitiesService: ActivitiesService
     @Published var activities: [Activity]
     
     
     // MARK: - Init
-    init(activitiesService: ActivitiesService, activities: [Activity] = []) {
+    init(activitiesService: ActivitiesService,
+         analyticsService: AnalyticsService,
+         activities: [Activity] = []) {
         self.activitiesService = activitiesService
         self.activities = activities
+        self.analyticsService = analyticsService
     }
     
     // MARK: - Data Handling
@@ -39,5 +43,23 @@ class ActivitiesListViewModel: ObservableObject {
     func generateMockData() {
         activitiesService.generateMockData()
         fetchActivities()
+    }
+
+    func getActivityDetailViewModel(activity: Activity) -> ActivityDetailViewModel {
+        return .init(activity: activity, analyticsService: analyticsService)
+    }
+}
+
+//MARK: - Analytics Service
+extension ActivitiesListViewModel {
+    func onViewAppear() {
+        analyticsService.logScreenEvent(screenName: "activity_list")
+    }
+
+    func activityDetailRequired() {
+        analyticsService.logCustomEvent(event: "activity_detail_required",
+                                        parameters: [
+                                            "origin" : "view_activitiesListView"
+                                        ])
     }
 }

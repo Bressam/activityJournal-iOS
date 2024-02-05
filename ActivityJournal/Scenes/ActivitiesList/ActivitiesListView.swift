@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import FirebaseAnalytics
 
 struct ActivityItem: View {
     @State var activity: Activity
@@ -31,6 +30,13 @@ struct ActivitiesListView: View {
     @State private var showingAlert = false
     @State private var path = NavigationPath()
     
+    init(viewModel: ActivitiesListViewModel, showingAlert: Bool = false, path: NavigationPath = NavigationPath()) {
+        self.viewModel = viewModel
+        self.showingAlert = showingAlert
+        self.path = path
+        viewModel.onViewAppear()
+    }
+    
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
@@ -45,7 +51,6 @@ struct ActivitiesListView: View {
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
-        .analyticsScreen(name: "activity_list")
     }
     
     @ViewBuilder
@@ -64,17 +69,14 @@ struct ActivitiesListView: View {
             }
             .scrollContentBackground(.hidden)
             .navigationDestination(for: Activity.self) { activity in
-                generateToActivityDetailView(activity: activity)
+                generateActivityDetailView(activity: activity)
             }
         }
     }
     
-    private func generateToActivityDetailView(activity: Activity) -> ActivityDetailView {
-        Analytics.logEvent("activity_detail_required",
-                           parameters: [
-                            "origin" : "view_activitiesListView"
-                           ])
-        return ActivityDetailView(viewModel: .init(activity: activity))
+    private func generateActivityDetailView(activity: Activity) -> ActivityDetailView {
+        viewModel.activityDetailRequired()
+        return ActivityDetailView(viewModel: viewModel.getActivityDetailViewModel(activity: activity))
     }
     
     private var emptyItemsView: some View {
@@ -113,5 +115,6 @@ struct ActivitiesListView: View {
 #Preview {
     let activitiesService = ActivitiesServiceFactory.shared.createActivitiesService(mocked: true)
     activitiesService.generateMockData()
-    return ActivitiesListView(viewModel: .init(activitiesService: activitiesService))
+    let dummyAnalytics = AnalyticsServiceFactory.shared.createAnalyticsServiceFactory(config: .mocked)
+    return ActivitiesListView(viewModel: .init(activitiesService: activitiesService, analyticsService: dummyAnalytics))
 }
