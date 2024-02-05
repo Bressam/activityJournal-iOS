@@ -18,6 +18,9 @@
 		18158D172ADDF92100789A59 /* LocalActivityDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D162ADDF92100789A59 /* LocalActivityDataProvider.swift */; };
 		18158D1A2ADDFC2500789A59 /* ActivityDataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D192ADDFC2500789A59 /* ActivityDataProviderMock.swift */; };
 		18158D1D2ADE111700789A59 /* ActivitiesServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18158D1C2ADE111700789A59 /* ActivitiesServiceFactory.swift */; };
+		18667EA52B70612D00B3721C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18667EA42B70612D00B3721C /* AppDelegate.swift */; };
+		18667EA62B70612D00B3721C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18667EA42B70612D00B3721C /* AppDelegate.swift */; };
+		18667EA72B70612D00B3721C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18667EA42B70612D00B3721C /* AppDelegate.swift */; };
 		187E115C2B70531D00EEB3D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187E115B2B70531D00EEB3D3 /* GoogleService-Info.plist */; };
 		187E115D2B70531D00EEB3D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187E115B2B70531D00EEB3D3 /* GoogleService-Info.plist */; };
 		187E115E2B70531D00EEB3D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 187E115B2B70531D00EEB3D3 /* GoogleService-Info.plist */; };
@@ -70,6 +73,7 @@
 		18158D162ADDF92100789A59 /* LocalActivityDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalActivityDataProvider.swift; sourceTree = "<group>"; };
 		18158D192ADDFC2500789A59 /* ActivityDataProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataProviderMock.swift; sourceTree = "<group>"; };
 		18158D1C2ADE111700789A59 /* ActivitiesServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesServiceFactory.swift; sourceTree = "<group>"; };
+		18667EA42B70612D00B3721C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		187E115B2B70531D00EEB3D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		18D9982E2ADC7B880019D9F2 /* ActivityJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActivityJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D998312ADC7B880019D9F2 /* ActivityJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityJournalApp.swift; sourceTree = "<group>"; };
@@ -215,9 +219,10 @@
 		18D998302ADC7B880019D9F2 /* ActivityJournal */ = {
 			isa = PBXGroup;
 			children = (
-				187E115B2B70531D00EEB3D3 /* GoogleService-Info.plist */,
 				18D998372ADC7B890019D9F2 /* ActivityJournal.entitlements */,
+				187E115B2B70531D00EEB3D3 /* GoogleService-Info.plist */,
 				18D998312ADC7B880019D9F2 /* ActivityJournalApp.swift */,
+				18667EA42B70612D00B3721C /* AppDelegate.swift */,
 				18D998352ADC7B890019D9F2 /* Assets.xcassets */,
 				18D9985E2ADC85290019D9F2 /* Model */,
 				18D998382ADC7B890019D9F2 /* Preview Content */,
@@ -581,6 +586,7 @@
 				18158D062ADD78C500789A59 /* Date+Extensions.swift in Sources */,
 				18D9986A2ADC99A60019D9F2 /* ActivitiesListViewModel.swift in Sources */,
 				18158D1A2ADDFC2500789A59 /* ActivityDataProviderMock.swift in Sources */,
+				18667EA52B70612D00B3721C /* AppDelegate.swift in Sources */,
 				18158D012ADD75B600789A59 /* ActivityChartView.swift in Sources */,
 				18158D152ADDF5F300789A59 /* ActivitiesService.swift in Sources */,
 				18D998322ADC7B880019D9F2 /* ActivityJournalApp.swift in Sources */,
@@ -602,6 +608,7 @@
 				18BEF68F2ADE172300FB27CA /* ActivityCategory.swift in Sources */,
 				18D998632ADC85910019D9F2 /* ActivityDetailViewModel.swift in Sources */,
 				18D998442ADC7B890019D9F2 /* ActivityServiceTests.swift in Sources */,
+				18667EA62B70612D00B3721C /* AppDelegate.swift in Sources */,
 				18D998672ADC85E10019D9F2 /* Activity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -610,6 +617,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18667EA72B70612D00B3721C /* AppDelegate.swift in Sources */,
 				18D9984E2ADC7B890019D9F2 /* ActivityJournalUITests.swift in Sources */,
 				18D998502ADC7B890019D9F2 /* ActivityJournalUITestsLaunchTests.swift in Sources */,
 			);

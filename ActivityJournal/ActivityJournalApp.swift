@@ -10,6 +10,9 @@ import SwiftData
 
 @main
 struct ActivityJournalApp: App {
+    // MARK: - AppDelegate. Swiftui handles its lifecycle when using property wrapper
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     // MARK: - Services
     let activitiesService: ActivitiesService
 
