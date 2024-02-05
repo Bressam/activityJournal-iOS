@@ -19,6 +19,7 @@ struct ActivitiesChartsView: View {
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
+        .analyticsScreen(name: "activity_charts_list")
     }
     
     @ViewBuilder

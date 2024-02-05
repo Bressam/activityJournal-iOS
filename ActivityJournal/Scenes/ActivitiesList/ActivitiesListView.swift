@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseAnalytics
 
 struct ActivityItem: View {
     @State var activity: Activity
@@ -44,6 +45,7 @@ struct ActivitiesListView: View {
         }.onAppear(perform: {
             viewModel.fetchActivities()
         })
+        .analyticsScreen(name: "activity_list")
     }
     
     @ViewBuilder
@@ -62,9 +64,17 @@ struct ActivitiesListView: View {
             }
             .scrollContentBackground(.hidden)
             .navigationDestination(for: Activity.self) { activity in
-                ActivityDetailView(viewModel: .init(activity: activity))
+                generateToActivityDetailView(activity: activity)
             }
         }
+    }
+    
+    private func generateToActivityDetailView(activity: Activity) -> ActivityDetailView {
+        Analytics.logEvent("activity_detail_required",
+                           parameters: [
+                            "origin" : "view_activitiesListView"
+                           ])
+        return ActivityDetailView(viewModel: .init(activity: activity))
     }
     
     private var emptyItemsView: some View {

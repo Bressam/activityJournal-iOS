@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseAnalytics
 
 struct ActivityDetailView: View {
     private let viewtitle: String = "Edit activity"
@@ -32,6 +33,7 @@ struct ActivityDetailView: View {
         }
         .navigationTitle(viewtitle)
         .navigationBarTitleDisplayMode(.inline)
+        .analyticsScreen(name: "activity_detail")
     }
     
     @ViewBuilder

@@ -8,6 +8,7 @@
 import SwiftUI
 import Charts
 import SwiftData
+import FirebaseAnalytics
 
 struct ActivityChartView: View {
     var activity: Activity?
@@ -37,7 +38,8 @@ struct ActivityChartView: View {
                 .symbolEffect(.pulse.byLayer)
             }, description: {
                 Text("New data will appear when logged at the activity details.")
-                addLogToActivityButton(buttonTitle: "Do you want to log data?")
+                addLogToActivityButton(buttonTitle: "Do you want to log data?",
+                                       fromEmptyChart: true)
             })
         }
         .background(activityChartData.category.chartDataColor.opacity(0.6).gradient)
@@ -87,12 +89,14 @@ struct ActivityChartView: View {
     }
     
     @ViewBuilder
-    private func addLogToActivityButton(buttonTitle: String) -> some View {
+    private func addLogToActivityButton(buttonTitle: String,
+                                        fromEmptyChart: Bool = false) -> some View {
         Button(buttonTitle) {
             guard activity != nil else {
                 return
             }
             showingPopover = true
+            logActivityDetailAnalytics(fromEmptyChart)
         }
         .fontWeight(.medium)
         .sheet(isPresented: $showingPopover,
@@ -100,6 +104,14 @@ struct ActivityChartView: View {
             ActivityDetailView(isModallyPresented: true,
                                viewModel: .init(activity: activity!))
         }
+    }
+
+    private func logActivityDetailAnalytics(_ fromEmptyChart: Bool) {
+        let eventOrigin: String = fromEmptyChart ? "empty_chart_add_log" : "data_chart_add_log"
+        Analytics.logEvent("activity_detail_required",
+                           parameters: [
+                            "origin" : eventOrigin
+                           ])
     }
 }
 
